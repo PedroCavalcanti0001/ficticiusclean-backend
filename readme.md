@@ -19,7 +19,7 @@ mvn package
 
 ## Iniciar API
 
-O JAR criado anteriormente está na pasta /target dentro do diretório do raiz do projeto. Acesse a pasta 
+O JAR criado anteriormente está na pasta /target dentro do diretório raiz do projeto. Acesse a pasta 
 e execute o seguinte comando.
 ```bash
 java -jar ficticiusclean-0.0.1-SNAPSHOT.jar
