@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "VEHICLE")
-@Validated
-@Valid
 public class VehicleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
