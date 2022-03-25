@@ -27,7 +27,7 @@ java -jar ficticiusclean-0.0.1-SNAPSHOT.jar
 
 
 ## Documentação
-A Api feita através do swagger pode ser encontrada em `/swagger-ui/index.html#/` após iniciar a API.
+A documentação feita através do swagger pode ser encontrada em `/swagger-ui/index.html#/` após iniciar a API.
 
 
 ## Autores
