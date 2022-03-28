@@ -1,18 +1,18 @@
-package me.pedroeugenio.ficticiusclean.infra.entity;
+package me.pedroeugenio.ficticiusclean.data.entity;
 
-import me.pedroeugenio.ficticiusclean.domain.model.VehicleExpenseForecastDTO;
+import me.pedroeugenio.ficticiusclean.domain.model.VehicleExpenseForecastModel;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(query = "SELECT new me.pedroeugenio.ficticiusclean.infra.entity.VehicleExpenseEntity(v.name,v.brand,v.manufacturingYear," +
+        @NamedQuery(query = "SELECT new me.pedroeugenio.ficticiusclean.data.entity.VehicleExpenseDTO(v.name,v.brand,v.manufacturingYear," +
                 "ROUND((:kmTraveledInTheCity/v.averageConsumptionInTheCity)+(:kmTraveledInTheHighways / v.averageConsumptionInTheHighways), 2)," +
                 "ROUND(((:kmTraveledInTheCity/v.averageConsumptionInTheCity)+(:kmTraveledInTheHighways / v.averageConsumptionInTheHighways)) * :price, 2) as SPENT" +
-                ") FROM VehicleEntity v order by SPENT desc", name = "VehicleExpenseEntity.findAllSortedVehicle")
+                ") FROM VehicleDTO v order by SPENT desc", name = "VehicleExpenseEntity.findAllSortedVehicle")
 })
-public class VehicleExpenseEntity {
+public class VehicleExpenseDTO {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
@@ -23,7 +23,7 @@ public class VehicleExpenseEntity {
     private Double fuelAmountSpent;
     private Double totalamountSpentOnFuel;
 
-    public VehicleExpenseEntity(String name, String brand, int manufacturingYear, Double fuelAmountSpent, Double totalamountSpentOnFuel) {
+    public VehicleExpenseDTO(String name, String brand, int manufacturingYear, Double fuelAmountSpent, Double totalamountSpentOnFuel) {
         this.name = name;
         this.brand = brand;
         this.manufacturingYear = manufacturingYear;
@@ -31,16 +31,16 @@ public class VehicleExpenseEntity {
         this.totalamountSpentOnFuel = totalamountSpentOnFuel;
     }
 
-    public VehicleExpenseEntity() {
+    public VehicleExpenseDTO() {
 
     }
 
-    public static VehicleExpenseEntity fromDto(VehicleExpenseForecastDTO dto, ModelMapper modelMapper) {
-        return modelMapper.map(dto, VehicleExpenseEntity.class);
+    public static VehicleExpenseDTO fromDto(VehicleExpenseForecastModel dto, ModelMapper modelMapper) {
+        return modelMapper.map(dto, VehicleExpenseDTO.class);
     }
 
-    public VehicleExpenseForecastDTO toDto(ModelMapper modelMapper) {
-        return modelMapper.map(this, VehicleExpenseForecastDTO.class);
+    public VehicleExpenseForecastModel toDto(ModelMapper modelMapper) {
+        return modelMapper.map(this, VehicleExpenseForecastModel.class);
     }
 
 

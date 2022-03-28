@@ -1,8 +1,8 @@
 package me.pedroeugenio.ficticiusclean.presenter.api;
 
-import me.pedroeugenio.ficticiusclean.domain.model.VehicleDTO;
-import me.pedroeugenio.ficticiusclean.domain.model.VehicleExpenseForecastDTO;
-import me.pedroeugenio.ficticiusclean.infra.VehicleServiceImpl;
+import me.pedroeugenio.ficticiusclean.domain.model.VehicleModel;
+import me.pedroeugenio.ficticiusclean.domain.model.VehicleExpenseForecastModel;
+import me.pedroeugenio.ficticiusclean.data.VehicleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class VehicleController {
     private VehicleServiceImpl vehicleService;
 
     @GetMapping("previsao-gastos")
-    public ResponseEntity<List<VehicleExpenseForecastDTO>> getExpenseForecast(
+    public ResponseEntity<List<VehicleExpenseForecastModel>> getExpenseForecast(
             @RequestParam() BigDecimal price,
             @RequestParam() BigDecimal kmTraveledInTheCity,
             @RequestParam() BigDecimal kmTraveledInTheHighways) {
@@ -28,8 +28,8 @@ public class VehicleController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> saveVehicle(@RequestBody @Valid VehicleDTO vehicleDTO) {
-        vehicleService.save(vehicleDTO);
+    public ResponseEntity<Object> saveVehicle(@RequestBody @Valid VehicleModel vehicleModel) {
+        vehicleService.save(vehicleModel);
         return ResponseEntity.created(URI.create("previsao-gastos")).build();
     }
 }

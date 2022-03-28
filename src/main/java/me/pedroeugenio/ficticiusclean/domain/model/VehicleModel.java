@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class VehicleDTO implements Serializable {
+public class VehicleModel implements Serializable {
 
     @NotEmpty
     @NotNull
@@ -28,7 +28,7 @@ public class VehicleDTO implements Serializable {
     @DecimalMin("1.0")
     private BigDecimal averageConsumptionInTheHighways;
 
-    public VehicleDTO(String name, String brand, String model, int manufacturingYear, BigDecimal averageConsumptionInTheCity, BigDecimal averageConsumptionInTheHighways) {
+    public VehicleModel(String name, String brand, String model, int manufacturingYear, BigDecimal averageConsumptionInTheCity, BigDecimal averageConsumptionInTheHighways) {
         this.name = name;
         this.brand = brand;
         this.model = model;
@@ -37,7 +37,7 @@ public class VehicleDTO implements Serializable {
         this.averageConsumptionInTheHighways = averageConsumptionInTheHighways;
     }
 
-    public VehicleDTO() {
+    public VehicleModel() {
 
     }
 

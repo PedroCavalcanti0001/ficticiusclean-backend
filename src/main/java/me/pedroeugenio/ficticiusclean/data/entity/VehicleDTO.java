@@ -1,16 +1,14 @@
-package me.pedroeugenio.ficticiusclean.infra.entity;
+package me.pedroeugenio.ficticiusclean.data.entity;
 
-import me.pedroeugenio.ficticiusclean.domain.model.VehicleDTO;
+import me.pedroeugenio.ficticiusclean.domain.model.VehicleModel;
 import org.modelmapper.ModelMapper;
-import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "VEHICLE")
-public class VehicleEntity {
+public class VehicleDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,12 +25,12 @@ public class VehicleEntity {
     @Column(nullable = false)
     private BigDecimal averageConsumptionInTheHighways;
 
-    public static VehicleEntity fromDto(VehicleDTO vehicleDTO, ModelMapper modelMapper) {
-        return modelMapper.map(vehicleDTO, VehicleEntity.class);
+    public static VehicleDTO fromDto(VehicleModel vehicleModel, ModelMapper modelMapper) {
+        return modelMapper.map(vehicleModel, VehicleDTO.class);
     }
 
-    public VehicleDTO toDto(ModelMapper modelMapper) {
-        return modelMapper.map(this, VehicleDTO.class);
+    public VehicleModel toDto(ModelMapper modelMapper) {
+        return modelMapper.map(this, VehicleModel.class);
     }
 
     public Long getId() {

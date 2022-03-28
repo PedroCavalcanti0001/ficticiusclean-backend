@@ -4,9 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
-import me.pedroeugenio.ficticiusclean.domain.model.VehicleDTO;
-import me.pedroeugenio.ficticiusclean.domain.model.VehicleExpenseForecastDTO;
-import me.pedroeugenio.ficticiusclean.infra.VehicleServiceImpl;
+import me.pedroeugenio.ficticiusclean.domain.model.VehicleModel;
+import me.pedroeugenio.ficticiusclean.domain.model.VehicleExpenseForecastModel;
+import me.pedroeugenio.ficticiusclean.data.VehicleServiceImpl;
 import me.pedroeugenio.ficticiusclean.presenter.api.VehicleController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ public class VehicleControllerTest {
 
     @Test
     void shouldReturnSuccessWhenSavingVehicle() {
-        VehicleDTO vehicleDTO = new VehicleDTO("Carro",
+        VehicleModel vehicleModel = new VehicleModel("Carro",
                 "marca",
                 "modelo",
                 2015,
@@ -48,7 +48,7 @@ public class VehicleControllerTest {
 
         RestAssuredMockMvc.given()
                 .contentType(ContentType.JSON)
-                .body(new Gson().toJson(vehicleDTO))
+                .body(new Gson().toJson(vehicleModel))
                 .post("/api/v1/veiculos")
                 .then()
                 .statusCode(HttpStatus.CREATED.value());
@@ -56,7 +56,7 @@ public class VehicleControllerTest {
 
     @Test
     void shouldReturnBadRequestWhenSavingVehicleWithEmptyName() {
-        VehicleDTO vehicleDTO = new VehicleDTO("",
+        VehicleModel vehicleModel = new VehicleModel("",
                 "marca",
                 "modelo",
                 2015,
@@ -64,7 +64,7 @@ public class VehicleControllerTest {
                 new BigDecimal("150"));
         RestAssuredMockMvc.given()
                 .contentType(ContentType.JSON)
-                .body(new Gson().toJson(vehicleDTO))
+                .body(new Gson().toJson(vehicleModel))
                 .post("/api/v1/veiculos")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
@@ -72,7 +72,7 @@ public class VehicleControllerTest {
 
     @Test
     void shouldReturnBadRequestWhenSavingVehicleWithEmptyBrand() {
-        VehicleDTO vehicleDTO = new VehicleDTO("Carro",
+        VehicleModel vehicleModel = new VehicleModel("Carro",
                 "",
                 "modelo",
                 2015,
@@ -80,7 +80,7 @@ public class VehicleControllerTest {
                 new BigDecimal("150"));
         RestAssuredMockMvc.given()
                 .contentType(ContentType.JSON)
-                .body(new Gson().toJson(vehicleDTO))
+                .body(new Gson().toJson(vehicleModel))
                 .post("/api/v1/veiculos")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
@@ -88,7 +88,7 @@ public class VehicleControllerTest {
 
     @Test
     void shouldReturnBadRequestWhenSavingVehicleWithEmptyCarModel() {
-        VehicleDTO vehicleDTO = new VehicleDTO("Carro",
+        VehicleModel vehicleModel = new VehicleModel("Carro",
                 "marca",
                 "",
                 2015,
@@ -96,7 +96,7 @@ public class VehicleControllerTest {
                 new BigDecimal("150"));
         RestAssuredMockMvc.given()
                 .contentType(ContentType.JSON)
-                .body(new Gson().toJson(vehicleDTO))
+                .body(new Gson().toJson(vehicleModel))
                 .post("/api/v1/veiculos")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
@@ -104,7 +104,7 @@ public class VehicleControllerTest {
 
     @Test
     void shouldReturnBadRequestWhenSavingVehicleWithInvalidDate() {
-        VehicleDTO vehicleDTO = new VehicleDTO("Carro",
+        VehicleModel vehicleModel = new VehicleModel("Carro",
                 "marca",
                 "modelo",
                 1900,
@@ -112,7 +112,7 @@ public class VehicleControllerTest {
                 new BigDecimal("150"));
         RestAssuredMockMvc.given()
                 .contentType(ContentType.JSON)
-                .body(new Gson().toJson(vehicleDTO))
+                .body(new Gson().toJson(vehicleModel))
                 .post("/api/v1/veiculos")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
@@ -120,7 +120,7 @@ public class VehicleControllerTest {
 
     @Test
     void shouldReturnBadRequestWhenSavingVehicleWithInvalidAverageConsumptionInTheCity() {
-        VehicleDTO vehicleDTO = new VehicleDTO("Carro",
+        VehicleModel vehicleModel = new VehicleModel("Carro",
                 "marca",
                 "modelo",
                 2015,
@@ -128,7 +128,7 @@ public class VehicleControllerTest {
                 new BigDecimal("150"));
         RestAssuredMockMvc.given()
                 .contentType(ContentType.JSON)
-                .body(new Gson().toJson(vehicleDTO))
+                .body(new Gson().toJson(vehicleModel))
                 .post("/api/v1/veiculos")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
@@ -136,7 +136,7 @@ public class VehicleControllerTest {
 
     @Test
     void shouldReturnBadRequestWhenSavingVehicleWithInvalidAverageConsumptionInTheHighways() {
-        VehicleDTO vehicleDTO = new VehicleDTO("Carro",
+        VehicleModel vehicleModel = new VehicleModel("Carro",
                 "marca",
                 "modelo",
                 2015,
@@ -144,7 +144,7 @@ public class VehicleControllerTest {
                 null);
         RestAssuredMockMvc.given()
                 .contentType(ContentType.JSON)
-                .body(new Gson().toJson(vehicleDTO))
+                .body(new Gson().toJson(vehicleModel))
                 .post("/api/v1/veiculos")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
@@ -152,9 +152,9 @@ public class VehicleControllerTest {
 
     @Test
     void shouldReturnOkWhenSearchingForExpenseCalculation() {
-        VehicleExpenseForecastDTO vehicleExpenseForecastDTO = new VehicleExpenseForecastDTO("nome", "marca", 2021, 25.5f, 13.3f);
+        VehicleExpenseForecastModel vehicleExpenseForecastModel = new VehicleExpenseForecastModel("nome", "marca", 2021, 25.5f, 13.3f);
         Mockito.when(this.service.getExpenseForecast(new BigDecimal("8.3"), new BigDecimal("8.3"), new BigDecimal("8.3")))
-                .thenReturn(List.of(vehicleExpenseForecastDTO));
+                .thenReturn(List.of(vehicleExpenseForecastModel));
 
         RestAssuredMockMvc.given()
                 .accept(ContentType.JSON)
@@ -170,9 +170,9 @@ public class VehicleControllerTest {
 
     @Test
     void shouldReturnBadRequestWhenSearchingForExpenseCalculationWithoutParams() {
-        VehicleExpenseForecastDTO vehicleExpenseForecastDTO = new VehicleExpenseForecastDTO("nome", "marca", 2021, 25.5f, 13.3f);
+        VehicleExpenseForecastModel vehicleExpenseForecastModel = new VehicleExpenseForecastModel("nome", "marca", 2021, 25.5f, 13.3f);
         Mockito.when(this.service.getExpenseForecast(new BigDecimal("8.3"), new BigDecimal("8.3"), new BigDecimal("8.3")))
-                .thenReturn(List.of(vehicleExpenseForecastDTO));
+                .thenReturn(List.of(vehicleExpenseForecastModel));
 
         RestAssuredMockMvc.given()
                 .accept(ContentType.JSON)

@@ -1,6 +1,6 @@
 package me.pedroeugenio.ficticiusclean.domain.model;
 
-public class VehicleExpenseForecastDTO {
+public class VehicleExpenseForecastModel {
     private String name;
     private String brand;
     private int manufacturingYear;
@@ -8,7 +8,7 @@ public class VehicleExpenseForecastDTO {
     private Float totalamountSpentOnFuel;
 
 
-    public VehicleExpenseForecastDTO(String name, String brand, int manufacturingYear, Float fuelAmountSpent, Float totalamountSpentOnFuel) {
+    public VehicleExpenseForecastModel(String name, String brand, int manufacturingYear, Float fuelAmountSpent, Float totalamountSpentOnFuel) {
         this.name = name;
         this.brand = brand;
         this.manufacturingYear = manufacturingYear;
