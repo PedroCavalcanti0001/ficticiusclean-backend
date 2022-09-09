@@ -45,7 +45,7 @@ geoId: 106057199
 
 ### Mensagens
 
-Através do arquivo mensagens_bot.yml é possivel customizar as mensagens exibilidas no telegram. Assim como os outros arquivos, esse também é gerado após iniciliar o bot pela primeira vez.
+Através do arquivo mensagens_bot.yml é possivel customizar as mensagens exibilidas no telegram. Assim como os outros arquivos, esse também é gerado após iniciar o bot pela primeira vez.
 
 `mensagens_bot.yml`
 ```
